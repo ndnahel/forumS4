@@ -6,6 +6,12 @@
     <section class="col">
         <h1 class="mb-4">Forum</h1>
         <h3 class="mb-4">Tous les messages dans : "{{ category.name }}"</h3>
+        {% if is_granted('ROLE_MOD') %}
+            <a href="{{ path('app_category_remove', {id: category.id}) }}"
+               class="btn btn-danger mb-4">
+                Supprimer la catégorie <i class="fa-solid fa-trash"></i>
+            </a>
+        {% endif %}
         <a href="{{ path('app_category_msg_new', {id: category.id }) }}" class="btn btn-dark mb-4">Nouveau message <i
                     class="fa-solid
         fa-plus"></i></a>
