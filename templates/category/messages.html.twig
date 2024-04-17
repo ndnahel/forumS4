@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Forum ~ Catégorie "{{ category.name }}"{% endblock %}
+
+{% block body %}
+    <section class="col">
+        <h1 class="mb-4">Forum</h1>
+        <h3 class="mb-4">Tous les messages dans : "{{ category.name }}"</h3>
+        <a href="{{ path('app_category_msg_new', {id: category.id }) }}" class="btn btn-dark mb-4">Nouveau message <i
+                    class="fa-solid
+        fa-plus"></i></a>
+        <div class="d-flex" style="gap:20px">
+            {% for message in messages %}
+                <div class="card h-100">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <span class="badge py-2 mb-3 d-block border text-dark border-dark">
+                                Posté le {{ message.createdAt|date('d/m/Y à H:i') }} <i class="fa-solid
+                                fa-clock"></i><br><br>
+                                Par {{ message.author.name }} <i class="fa-solid fa-user"></i>
+                            </span>
+                            <h5 class="card-title">{{ message.title }}</h5>
+                            <p class="card-text">{{ message.message }}</p>
+                            <div class="d-block mb-3">
+                                {% for tag in message.tags %}
+                                    <span class="badge" style="background-color: {{ '#' ~ tag.color }} !important;">
+                                        <i class="fa-solid fa-hashtag"></i> {{ tag.libelle }}
+                                    </span>
+                                {% endfor %}
+                            </div>
+                            <a href="#" class="btn btn-primary">Réagir <i class="fa-solid fa-thumbs-up"></i></a>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                Aucun message pour le moment
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

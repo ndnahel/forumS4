@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Forum ~ Catégories{% endblock %}
+
+{% block body %}
+    <section class="col">
+        <h1 class="mb-4">Forum</h1>
+        <h3 class="mb-4">Catégories</h3>
+        <a href="{{ path('app_category_new') }}" class="btn btn-dark mb-4">Nouvelle
+            catégorie <i class="fa-solid fa-plus"></i></a>
+        <div class="d-grid" style="grid-template-columns: repeat(2, 1fr);">
+            {% for category in categories %}
+                <a class="mx-2 my-1" href="{{ path('app_category_show', {id: category.id}) }}">
+                    <span class="badge p-5 d-block h3" style="background-color: {{ '#' ~ category.color }} !important;
+                            text-decoration: none !important; font-size: 16px !important;">
+                        {{ category.name }}
+                        <a href="{{ path('app_category_remove', {id: category.id}) }}"
+                           class="text-decoration-none text-dark">
+                        </a>
+                    </span>
+                </a>
+            {% else %}
+                Aucune catégorie
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Forum ~ Accueil{% endblock %}
+
+{% block body %}
+    <h1>Forum</h1>
+
+    <div class="d-flex mt-4" style="gap: 20px">
+        <section class="col-9">
+            <h3 class="mb-4">Derniers messages</h3>
+            <div class="d-flex" style="gap:20px">
+                {% for message in messages %}
+                    <div class="card h-100">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <span class="badge py-2 mb-3 d-block" style="background-color: {{
+                                '#' ~ message.category
+                                .color }}
+                                        !important;">
+                                    {{ message.category.name }}
+                                </span>
+                                <h5 class="card-title">{{ message.title }}</h5>
+                                <p class="card-text">{{ message.message }}</p>
+                                <div class="d-block mb-3">
+                                    {% for tag in message.tags %}
+                                        <span class="badge" style="background-color: {{ '#' ~ tag.color }} !important;">
+                                        <i class="fa-solid fa-hashtag"></i> {{ tag.libelle }}
+                                    </span>
+                                    {% endfor %}
+                                </div>
+                                <a href="#" class="btn btn-primary">Réagir <i class="fa-solid fa-thumbs-up"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    Aucun message
+                {% endfor %}
+            </div>
+        </section>
+        <section class="col">
+            <h3 class="mb-4">Tags</h3>
+            <div class="card" style="width: 18rem;">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        {% for tag in tags %}
+                            <span class="badge" style="background-color: {{ '#' ~ tag.color }} !important;">
+                            <i class="fa-solid fa-hashtag"></i> {{ tag.libelle }}
+                        </span>
+                        {% else %}
+                            Aucun tag
+                        {% endfor %}
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+{% endblock %}
