@@ -28,7 +28,9 @@
                                     </span>
                                     {% endfor %}
                                 </div>
-                                <a href="#" class="btn btn-primary">Réagir <i class="fa-solid fa-thumbs-up"></i></a>
+                                {% if app.user %}
+                                    <a href="#" class="btn btn-primary">Réagir <i class="fa-solid fa-thumbs-up"></i></a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

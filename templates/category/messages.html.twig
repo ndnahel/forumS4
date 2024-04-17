@@ -12,9 +12,11 @@
                 Supprimer la catégorie <i class="fa-solid fa-trash"></i>
             </a>
         {% endif %}
-        <a href="{{ path('app_category_msg_new', {id: category.id }) }}" class="btn btn-dark mb-4">Nouveau message <i
-                    class="fa-solid
-        fa-plus"></i></a>
+        {% if app.user %}
+            <a href="{{ path('app_category_msg_new', {id: category.id }) }}" class="btn btn-dark mb-4">
+                Nouveau message <i class="fa-solid fa-plus"></i>
+            </a>
+        {% endif %}
         <div class="d-flex" style="gap:20px">
             {% for message in messages %}
                 <div class="card h-100">
