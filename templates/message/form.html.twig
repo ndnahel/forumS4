@@ -1,9 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MessageController!{% endblock %}
+{% block title %}Forum ~ Formulaire{% endblock %}
 
 {% block body %}
+    <h1 class="mb-4">Forum</h1>
+    {% if options is defined %}
+        {% for option in options %}
+            {{ option|raw }}
+        {% endfor %}
+    {% endif %}
     {{ form_start(form) }}
-    <button type="submit" class="btn btn-dark mb-3">Valider</button>
+    <button type="submit" class="btn btn-dark mb-3 text-end float-end">Valider</button>
     {{ form_end(form) }}
 {% endblock %}

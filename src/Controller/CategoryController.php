@@ -73,9 +73,9 @@ class CategoryController extends AbstractController
 	{
 		$message = new Message();
 		$form = $this->createForm(MessageType::class, $message)->handleRequest($request);
+		$category = $em->getRepository(Category::class)->find($id);
 		
 		if ($form->isSubmitted() && $form->isValid()) {
-			$category = $em->getRepository(Category::class)->find($id);
 			$message->setAuthor($this->getUser());
 			$message->setCreatedAt(new \DateTime());
 			$message->setCategory($category);
@@ -86,7 +86,10 @@ class CategoryController extends AbstractController
 		}
 		
 		return $this->render('message/form.html.twig', [
-			'form' => $form->createView()
+			'form' => $form->createView(),
+			'options' => [
+				'categoryName' => '<h3 class="mb-4">Nouveau message > "' . $category->getName() . '"</h3>'
+			]
 		]);
 	}
 	
